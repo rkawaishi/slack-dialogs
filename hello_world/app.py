@@ -1,42 +1,35 @@
 import json
+import os
 
 # import requests
+from jinja2 import Environment, FileSystemLoader
+
+
+env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates"), encoding="utf8"))
+
+
+def render_index():
+    user_id = "test user"
+
+    template = env.get_template("index.html")
+    html = template.render(user_id=user_id)
+
+    return  {
+        "statusCode": 200,
+        "body": html,
+        "headers": {
+            "Content-Type": "text/html"
+        }
+    }
 
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
-
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
-
-    context: object, required
-        Lambda Context runtime methods and attributes
-
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
-
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
-
-    #     raise e
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
-    }
+    return render_index()
+    # return {
+    #     "statusCode": 200,
+    #     "body": json.dumps({
+    #         "message": render_index(),
+    #         # "location": ip.text.replace("\n", "")
+    #     }),
+    # }

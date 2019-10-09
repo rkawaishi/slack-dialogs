@@ -1,0 +1,19 @@
+{
+  "TableName": "SelectItem",
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "Id",
+      "AttributeType": "N"
+    }
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "Id",
+      "KeyType": "HASH"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 2,
+    "WriteCapacityUnits": 2
+  }
+}

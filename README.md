@@ -78,6 +78,8 @@ Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
 slack-dialogs$ docker-compose up -d
+slack-dialogs$ aws dynamodb create-table --cli-input-json file://test/item_table.json --endpoint-url http://localhost:8000
+slack-dialogs$ aws dynamodb batch-write-item --request-items file://test/item_table_data.json --endpoint-url http://localhost:8000
 slack-dialogs$ sam local invoke HelloWorldFunction --event events/event.json --env-vars test/env.json
 ```
 

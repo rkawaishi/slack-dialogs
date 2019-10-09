@@ -35,10 +35,8 @@ def lambda_handler(event, context):
     dynamodb = boto3.resource("dynamodb", endpoint_url=DYNAMODB_ENDPOINT)
     table = dynamodb.Table(TABLE_NAME)
 
-    res = table.query(KeyConditionExpression=Key("name").eq("sasaki-daisuke"))
+    res = table.scan()
     items = res["Items"]
-
-    print(items)
 
     return items
     # return {

@@ -1,0 +1,28 @@
+{
+  "SelectItem": [
+    {
+      "PutRequest": {
+        "Item": {
+          "Id": { "N": "1" },
+          "Name": { "S": "Foo" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Id": { "N": "2" },
+          "Name": { "S": "Bar" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Id": { "N": "3" },
+          "Name": { "S": "Baz" }
+        }
+      }
+    }
+  ]
+}

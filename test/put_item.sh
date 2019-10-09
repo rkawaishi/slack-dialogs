@@ -1,6 +1,0 @@
-aws dynamodb --endpoint-url http://localhost:8000 put-item --table-name writer --item '{"name":{"S":"sasaki-daisuke"},"url":{"S":"https://dev.classmethod.jp/author/sasaki-daisuke/"}}'
-aws dynamodb --endpoint-url http://localhost:8000 put-item --table-name writer --item '{"name":{"S":"shinyaa31"},"url":{"S":"https://dev.classmethod.jp/author/shinyaa31/"}}'
-aws dynamodb --endpoint-url http://localhost:8000 put-item --table-name writer --item '{"name":{"S":"akari7"},"url":{"S":"https://dev.classmethod.jp/author/akari7/"}}'
-aws dynamodb --endpoint-url http://localhost:8000 put-item --table-name writer --item '{"name":{"S":"oguri-hajime"},"url":{"S":"https://dev.classmethod.jp/author/oguri-hajime/"}}'
-aws dynamodb --endpoint-url http://localhost:8000 put-item --table-name writer --item '{"name":{"S":"miyamoto-daisuke"},"url":{"S":"https://dev.classmethod.jp/author/miyamoto-daisuke/"}}'
-aws dynamodb --endpoint-url http://localhost:8000 put-item --table-name writer --item '{"name":{"S":"otaki-ryuta"},"url":{"S":"https://dev.classmethod.jp/author/otaki-ryuta/"}}'

@@ -14,10 +14,14 @@ TABLE_NAME = os.getenv("TABLE_NAME")
 
 
 def render_index():
-    user_id = "test user"
+    dynamodb = boto3.resource("dynamodb", endpoint_url=DYNAMODB_ENDPOINT)
+    table = dynamodb.Table(TABLE_NAME)
+
+    res = table.scan()
+    items = res["Items"]
 
     template = env.get_template("index.html")
-    html = template.render(user_id=user_id)
+    html = template.render(items=items)
 
     return  {
         "statusCode": 200,
@@ -29,20 +33,12 @@ def render_index():
 
 
 def lambda_handler(event, context):
-    print(DYNAMODB_ENDPOINT)
-    print(TABLE_NAME)
+    path = event["path"]
 
-    dynamodb = boto3.resource("dynamodb", endpoint_url=DYNAMODB_ENDPOINT)
-    table = dynamodb.Table(TABLE_NAME)
+    if path == "/console":
+        return render_index()
 
-    res = table.scan()
-    items = res["Items"]
-
-    return items
-    # return {
-    #     "statusCode": 200,
-    #     "body": json.dumps({
-    #         "message": render_index(),
-    #         # "location": ip.text.replace("\n", "")
-    #     }),
-    # }
+    return {
+        "statusCode": 400,
+        "body": json.dumps({ "message": "Page not found" }),
+    }

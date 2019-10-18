@@ -48,6 +48,7 @@ def render_dialogs(payload):
                 "title": "Request a coffee",
                 "submit_label": "Submit",
                 "callback_id": f"{user_id}cofee_order_from",
+                "state": f"ts:{payload['message_ts']}",
                 "elements": [
                     {
                         "label": "Coffeee Type",
@@ -74,6 +75,10 @@ def render_dialogs(payload):
     return { "statusCode": 200, "body": "" }
 
 
+def render_response():
+    return { "statusCode": 200, "body": "" }
+
+
 def is_verify_token(event):
     token = event.get("token")
     return token == SLACK_BOT_VERIFY_TOKEN
@@ -87,7 +92,6 @@ def lambda_handler(event, context):
 
     elif path == "/slack/api/events":
         payload = json.loads(urllib.parse.unquote(event["body"][8:]))
-        print(payload)
 
         if "challenge" in payload:
             return payload["challenge"]
@@ -95,7 +99,11 @@ def lambda_handler(event, context):
         if not is_verify_token(payload):
             return "Token not verified"
 
-        return render_dialogs(payload)
+        if payload["type"] == "message_action":
+            return render_dialogs(payload)
+
+        if payload["type"] == "dialog_submission":
+            return render_response()
 
     return {
         "statusCode": 400,

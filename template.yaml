@@ -23,10 +23,17 @@ Resources:
           Properties:
             Path: /console
             Method: GET
+        PostSlackEventApi:
+          Type: Api
+          Properties:
+            Path: /slack/api/events
+            Method: POST
       Environment:
         Variables:
           DYNAMODB_ENDPOINT: ""
           TABLE_NAME:  ""
+          SLACK_BOT_TOKEN: ""
+          SLACK_BOT_VERIFY_TOKEN: ""
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
